@@ -1,0 +1,24 @@
+<../mkconfig
+
+MODS=\
+	cgi.m\
+	htmlent.m\
+	ohttp.m\
+	template.m\
+
+MODDIR=$ROOT/module
+
+$MODDIR/%.m:	%.m
+        rm -f $MODDIR/$stem.m && cp $stem.m $MODDIR/$stem.m
+
+
+MODFILES=${MODS:%=$MODDIR/%}
+
+all:QV:
+	
+install:V:	$MODFILES
+
+clean:QV:
+	
+nuke:V:$MODDIR/
+	rm -f $MODFILES

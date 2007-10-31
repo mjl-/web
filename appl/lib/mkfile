@@ -1,0 +1,23 @@
+<../../mkconfig
+
+TARG=\
+	cgi.dis\
+	htmlent.dis\
+	ohttp.dis\
+	template.dis\
+
+MODULES=\
+
+SYSMODULES=\
+	sys.m\
+	draw.m\
+	bufio.m\
+	dict.m\
+	string.m\
+	env.m\
+	cgi.m\
+	htmlent.m\
+
+DISBIN=$ROOT/dis/lib
+
+<$ROOT/mkfiles/mkdis

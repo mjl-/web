@@ -1,0 +1,23 @@
+<../../mkconfig
+
+DIRS=\
+
+TARG=\
+	cgienv.dis\
+	testcgi.dis\
+	testhtmlent.dis\
+	testtemplate2.dis\
+	testtemplate.dis\
+
+SYSMODULES=\
+	arg.m\
+	bufio.m\
+	daytime.m\
+	draw.m\
+	keyring.m\
+	string.m\
+	sys.m\
+
+DISBIN=$ROOT/dis
+
+<$ROOT/mkfiles/mkdis
