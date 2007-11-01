@@ -1,0 +1,8 @@
+	<tr>
+		<td class="mode">%mode%</td>
+		<td class="uid">%uid%</td>
+		<td class="gid">%gid%</td>
+		<td class="mtime">%mtime%</td>
+		<td class="length">%length%</td>
+		<td class="name"><a href="%&name%">%name%</a></td>
+	</tr>

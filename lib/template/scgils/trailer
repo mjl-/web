@@ -1,0 +1,8 @@
+</table>
+
+<div id="cmds">
+vacfs -p -h net!knaagkever.ueber.net!venti <{echo vac:%score%} && cd /n/vac%path%<br/>
+mount {vacfs -p -a net!knaagkever.ueber.net!venti vac:%score%} /n/vac && cd /n/vac%path%<br/>
+</div>
+	</body>
+</html>

@@ -3,6 +3,7 @@
 DIRS=\
 
 TARG=\
+	scgils.dis\
 	cgienv.dis\
 	testcgi.dis\
 	testhtmlent.dis\
@@ -14,7 +15,9 @@ SYSMODULES=\
 	bufio.m\
 	daytime.m\
 	draw.m\
+	env.m\
 	keyring.m\
+	template.m\
 	string.m\
 	sys.m\
 

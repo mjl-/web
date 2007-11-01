@@ -11,7 +11,10 @@ the following libraries are present:
 * ohttp, old http library.  do not use for new code, instead use nhttp,
   which will become just http when good enough.
 
-appl/cmd contains various some test programs that use these libraries.
+appl/cmd contains test programs that use these libraries.
+
+appl/cmd/scgils.b is a scgi program that displays directory listings,
+for use with scgid.
 
 writing documentation is on my todo list.
 

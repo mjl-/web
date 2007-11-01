@@ -1,0 +1,30 @@
+Status: 200 OK
+Content-Type: text/html; charset=utf-8
+Cache-control: max-age=86400
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<title>listing for %path%</title>
+<style type="text/css">
+body, table	{ color: black; background-color: white; }
+h1		{ font-size: 1.4em; margin-bottom: 2em; }
+td.length	{ text-align: right; }
+td.mtime	{ text-align: right; }
+td, th		{ padding-right: 3em; }
+td		{ font-family: monospace; }
+table		{ border: 1pt solid rgb(210, 210, 210); background-color: rgb(240, 240, 255); }
+#cmds		{ font-size: 0.7em; margin-top: 1em; margin-right: 2em; }
+</style>
+	</head>
+	<body>
+<h1>%path%</h1>
+<table>
+	<tr>
+		<th>mode</th>
+		<th>uid</th>
+		<th>gid</th>
+		<th>mtime</th>
+		<th>length</th>
+		<th>name</th>
+	</tr>
