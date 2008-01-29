@@ -5,6 +5,7 @@ MODS=\
 	htmlent.m\
 	ohttp.m\
 	template.m\
+	netstr.m\
 
 MODDIR=$ROOT/module
 

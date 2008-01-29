@@ -5,6 +5,7 @@ TARG=\
 	htmlent.dis\
 	ohttp.dis\
 	template.dis\
+	netstr.dis\
 
 MODULES=\
 

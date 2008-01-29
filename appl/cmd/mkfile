@@ -9,6 +9,9 @@ TARG=\
 	testhtmlent.dis\
 	testtemplate2.dis\
 	testtemplate.dis\
+	readnetstr.dis\
+	testnetstr.dis\
+	writenetstr.dis\
 
 SYSMODULES=\
 	arg.m\
