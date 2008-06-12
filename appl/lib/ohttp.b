@@ -39,7 +39,7 @@ include "pkcs.m";
 include "asn1.m";
 include "sslsession.m";
 include "ssl3.m";
-include "http.m";
+include "ohttp.m";
 
 sys: Sys;
 bufio: Bufio;

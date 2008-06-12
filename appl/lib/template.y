@@ -15,10 +15,8 @@ include "string.m";
 	str: String;
 include "regex.m";
 	regex: Regex;
-include "misc.m";
 
 sprint: import sys;
-misc: Misc;
 
 YYSTYPE: adt {
 	c: int;
@@ -437,7 +435,7 @@ applyform(form: ref Form, templ: list of string, pairs: list of (string, string)
 		} else {
 			if(len tokens == 1) {
 				if(token != "include" && token != "length")
-					warn("invalid command: "+misc->join(token::tokens, ", "));
+					warn("invalid command: "+joinstr(token::tokens, ", "));
 			}
 
 			if(ifstack != nil) {
@@ -483,13 +481,20 @@ init()
 	env = load Env Env->PATH;
 	str = load String String->PATH;
 	cgi = load Cgi Cgi->PATH;
-	misc = load Misc Misc->PATH;
 	if(cgi == nil)
 		nomod(Cgi->PATH);
-	if(misc == nil)
-		nomod(Misc->PATH);
 	cgi->init();
-	misc->init();
+}
+
+joinstr(l: list of string, e: string): string
+{
+	if(l == nil)
+		return "";
+	s := hd l;
+	l = tl l;
+	for(; l != nil; l = tl l)
+		s += e+hd l;
+	return s;
 }
 
 

@@ -15,10 +15,8 @@ include "string.m";
 	str: String;
 include "regex.m";
 	regex: Regex;
-include "misc.m";
 
 sprint: import sys;
-misc: Misc;
 
 YYSTYPE: adt {
 	c: int;
@@ -48,7 +46,7 @@ YYEOFCODE: con 1;
 YYERRCODE: con 2;
 YYMAXDEPTH: con 200;
 
-#line	128	"template.y"
+#line	126	"template.y"
 
 
 in: ref Iobuf;
@@ -361,7 +359,7 @@ applyform(form: ref Form, templ: list of string, pairs: list of (string, string)
 		} else {
 			if(len tokens == 1) {
 				if(token != "include" && token != "length")
-					warn("invalid command: "+misc->join(token::tokens, ", "));
+					warn("invalid command: "+joinstr(token::tokens, ", "));
 			}
 
 			if(ifstack != nil) {
@@ -407,13 +405,20 @@ init()
 	env = load Env Env->PATH;
 	str = load String String->PATH;
 	cgi = load Cgi Cgi->PATH;
-	misc = load Misc Misc->PATH;
 	if(cgi == nil)
 		nomod(Cgi->PATH);
-	if(misc == nil)
-		nomod(Misc->PATH);
 	cgi->init();
-	misc->init();
+}
+
+joinstr(l: list of string, e: string): string
+{
+	if(l == nil)
+		return "";
+	s := hd l;
+	l = tl l;
+	for(; l != nil; l = tl l)
+		s += e+hd l;
+	return s;
 }
 
 
@@ -814,89 +819,89 @@ yystack:
 		case yym {
 			
 1=>
-#line	55	"template.y"
+#line	53	"template.y"
 { return yys[yypt-0].yyv.c; }
 2=>
 yyval.c = yys[yyp+1].yyv.c;
 3=>
-#line	59	"template.y"
+#line	57	"template.y"
 { yyval.c = yys[yypt-2].yyv.c || yys[yypt-0].yyv.c; }
 4=>
 yyval.c = yys[yyp+1].yyv.c;
 5=>
-#line	63	"template.y"
+#line	61	"template.y"
 { yyval.c = yys[yypt-2].yyv.c && yys[yypt-0].yyv.c; }
 6=>
-#line	67	"template.y"
+#line	65	"template.y"
 { yyval.c = ! yys[yypt-0].yyv.c; }
 7=>
-#line	69	"template.y"
+#line	67	"template.y"
 {
 		(have, nil, nil, nil) := findvar(yys[yypt-0].yyv.v, parsepairs, parselpairs, parseforeach);
 		yyval.c = have;
 	}
 8=>
-#line	73	"template.y"
+#line	71	"template.y"
 { yyval.c = 1; }
 9=>
-#line	74	"template.y"
+#line	72	"template.y"
 { yyval.c = 0; }
 10=>
-#line	75	"template.y"
+#line	73	"template.y"
 { yyval.c = yys[yypt-2].yyv.s < yys[yypt-0].yyv.s; }
 11=>
-#line	76	"template.y"
+#line	74	"template.y"
 { yyval.c = yys[yypt-2].yyv.s > yys[yypt-0].yyv.s; }
 12=>
-#line	77	"template.y"
+#line	75	"template.y"
 { yyval.c = yys[yypt-2].yyv.s <= yys[yypt-0].yyv.s; }
 13=>
-#line	78	"template.y"
+#line	76	"template.y"
 { yyval.c = yys[yypt-2].yyv.s >= yys[yypt-0].yyv.s; }
 14=>
-#line	79	"template.y"
+#line	77	"template.y"
 { yyval.c = yys[yypt-2].yyv.s == yys[yypt-0].yyv.s; }
 15=>
-#line	80	"template.y"
+#line	78	"template.y"
 { yyval.c = yys[yypt-2].yyv.s != yys[yypt-0].yyv.s; }
 16=>
-#line	84	"template.y"
+#line	82	"template.y"
 { yyval.s = yys[yypt-0].yyv.s; }
 17=>
-#line	85	"template.y"
+#line	83	"template.y"
 { yyval.s = string yys[yypt-0].yyv.c; }
 18=>
 yyval.c = yys[yyp+1].yyv.c;
 19=>
-#line	89	"template.y"
+#line	87	"template.y"
 { yyval.c = yys[yypt-2].yyv.c * yys[yypt-0].yyv.c; }
 20=>
-#line	90	"template.y"
+#line	88	"template.y"
 { yyval.c = yys[yypt-2].yyv.c / yys[yypt-0].yyv.c; }
 21=>
-#line	91	"template.y"
+#line	89	"template.y"
 { yyval.c = yys[yypt-2].yyv.c + yys[yypt-0].yyv.c; }
 22=>
-#line	92	"template.y"
+#line	90	"template.y"
 { yyval.c = yys[yypt-2].yyv.c - yys[yypt-0].yyv.c; }
 23=>
 yyval.c = yys[yyp+1].yyv.c;
 24=>
-#line	96	"template.y"
+#line	94	"template.y"
 { yyval.c = yys[yypt-0].yyv.c; }
 25=>
-#line	97	"template.y"
+#line	95	"template.y"
 { yyval.c = - yys[yypt-0].yyv.c; }
 26=>
 yyval.c = yys[yyp+1].yyv.c;
 27=>
-#line	101	"template.y"
+#line	99	"template.y"
 { yyval.c = yys[yypt-1].yyv.c; }
 28=>
-#line	102	"template.y"
+#line	100	"template.y"
 { yyval.c = len yys[yypt-0].yyv.s; }
 29=>
-#line	104	"template.y"
+#line	102	"template.y"
 {
 		(have, t) := find(yys[yypt-0].yyv.v, parselists);
 		if(have) {
@@ -908,10 +913,10 @@ yyval.c = yys[yyp+1].yyv.c;
 		}
 	}
 30=>
-#line	117	"template.y"
+#line	115	"template.y"
 { yyval.s = yys[yypt-0].yyv.s; }
 31=>
-#line	119	"template.y"
+#line	117	"template.y"
 {
 		(have, nil, nil, value) := findvar(yys[yypt-0].yyv.v, parsepairs, parselpairs, parseforeach);
 		# xxx print warning if variable is missing
