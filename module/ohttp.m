@@ -1,5 +1,5 @@
 Http: module {
-	PATH:	con "/dis/lib/http.dis";
+	PATH:	con "/dis/lib/ohttp.dis";
 
 	init:	fn(bufio: Bufio);
 
