@@ -38,15 +38,15 @@ Item.text(it: self ref Item): string
 	for(l := it.cats; l != nil; l = tl l)
 		catstr += "/"+hd l;
 	if(catstr != nil)
-		catstr = tag("category", catstr[1:]);
+		catstr = "\n\t"+tag("category", catstr[1:]);
 	return "<item>"+
-		tag("title", it.title)+
-		tag("link", it.link)+
-		tag("description", it.descr)+
-		tag("pubDate", datestr(it.time, it.timetzoff))+
-		tag("guid", it.guid)+
+		"\n\t"+tag("title", it.title)+
+		"\n\t"+tag("link", it.link)+
+		"\n\t"+tag("description", it.descr)+
+		"\n\t"+tag("pubDate", datestr(it.time, it.timetzoff))+
+		"\n\t"+tag("guid", it.guid)+
 		catstr+
-		"</item>";
+		"\n</item>";
 }
 
 rssgen(title, link, descr: string, items: list of ref Item): string
@@ -56,9 +56,9 @@ rssgen(title, link, descr: string, items: list of ref Item): string
 	s := "";
 	for(; items != nil; items = tl items)
 		s += (hd items).text();
-	return "<?xml version=\"1.0\" ?><channel>"+
-		tag("title", title)+
-		tag("link", link)+
-		tag("description", descr)+
-		"<items>"+s+"</items></channel></xml>";
+	return "<?xml version=\"1.0\" ?>\n<rss version=\"2.0\">\n<channel>"+
+		"\n\t"+tag("title", title)+
+		"\n\t"+tag("link", link)+
+		"\n\t"+tag("description", descr)+
+		"\n"+s+"\n\t</channel>\n</rss>";
 }
