@@ -12,6 +12,7 @@ TARG=\
 	readnetstr.dis\
 	testnetstr.dis\
 	writenetstr.dis\
+	testrssgen.dis\
 
 SYSMODULES=\
 	arg.m\
@@ -23,6 +24,7 @@ SYSMODULES=\
 	template.m\
 	string.m\
 	sys.m\
+	rssgen.m\
 
 DISBIN=$ROOT/dis
 

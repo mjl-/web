@@ -6,5 +6,6 @@ MODS=\
 	ohttp.m\
 	template.m\
 	netstr.m\
+	rssgen.m\
 
 <mkmod
