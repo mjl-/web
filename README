@@ -1,22 +1,40 @@
-web - a collection of code for dealing with "the web"
+# status
+
+useful, some modules won't be used much though.
+
+
+# intro
+
+web - a collection of code for dealing with "the web".
+
+
+# install
 
 to install make sure this directory has a mkconfig.  you can bind/symlink
 the mkconfig from your inferno installation.  now execute "mk install"
 and all should be well.
 
-the following libraries are present:
+the following libraries are installed:
 * template, for making templates, useful for generating html
 * cgi, for parsing query-parts of urls
 * htmlent, for converting html entities (such as &quot;) to normal text
 * ohttp, old http library.  do not use for new code, instead use nhttp,
   which will become just http when good enough.
+* rssgen, for generating rss files
 
 appl/cmd contains test programs that use these libraries.
 
 appl/cmd/scgils.b is a scgi program that displays directory listings,
 for use with scgid.
 
-writing documentation is on my todo list.
+
+# licence & author
 
 all files are in the public domain.  bug reports, new code, comments
 and more are welcome at mechiel@xs4all.nl or mechiel@ueber.net.
+
+
+# todo
+
+clean up & write documentation.
+
