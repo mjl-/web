@@ -2,20 +2,28 @@ implement Cgi;
 
 include "sys.m";
 	sys: Sys;
-include "dict.m";
-	dict: Dictionary;
+	sprint: import sys;
+include "bufio.m";
+	bufio: Bufio;
+	Iobuf: import bufio;
 include "string.m";
 	str: String;
-include "draw.m";
 include "env.m";	
 	env: Env;
-include "bufio.m";
+include "dict.m";
+	dict: Dictionary;
+	Dict: import dict;
 include "cgi.m";
 
-bufio: Bufio;
-Iobuf: import bufio;
-Dict: import dict;
-print, sprint: import sys;
+
+init()
+{
+	sys = load Sys Sys->PATH;
+	bufio = load Bufio Bufio->PATH;
+	str = load String String->PATH;
+	env = load Env Env->PATH;
+	dict = load Dictionary Dictionary->PATH;
+}
 
 
 Fields.get(f: self ref Fields, name: string): string
@@ -56,24 +64,12 @@ Fields.all(f: self ref Fields): list of (string, string)
 	return f.l;
 }
 
-
-init()
+Fields.has(f: self ref Fields, name: string): int
 {
-	sys = load Sys Sys->PATH;
-	if(sys == nil)
-		raise "fail:load sys";
-	str = load String String->PATH;
-	if(str == nil)
-		raise "fail:load string";
-	dict = load Dictionary Dictionary->PATH;
-	if(dict == nil)
-		raise "fail:load dict";
-	env = load Env Env->PATH;
-	if(env == nil)
-		raise "fail:load dict";
-	bufio = load Bufio Bufio->PATH;
-	if(bufio == nil)
-		raise "fail:load bufio";
+	for(l := f.l; l != nil; l = tl l)
+		if((hd l).t0 == name)
+			return 1;
+	return 0;
 }
 
 
