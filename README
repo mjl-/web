@@ -14,6 +14,9 @@ to install make sure this directory has a mkconfig.  you can bind/symlink
 the mkconfig from your inferno installation.  now execute "mk install"
 and all should be well.
 
+when building from within inferno, insert SYSHOST=Inferno and ROOT=
+in the mk invocations to override the values in the mkconfig.
+
 the following libraries are installed:
 * template, for making templates, useful for generating html
 * cgi, for parsing query-parts of urls
@@ -36,5 +39,6 @@ and more are welcome at mechiel@xs4all.nl or mechiel@ueber.net.
 
 # todo
 
-clean up & write documentation.
-
+- clean up & write documentation.
+- think about whether doing cgi scripts in shell script is worth
+  the trouble, and how to do it best.

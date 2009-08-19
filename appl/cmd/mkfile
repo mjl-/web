@@ -1,7 +1,5 @@
 <../../mkconfig
 
-DIRS=\
-
 TARG=\
 	scgils.dis\
 	cgienv.dis\
@@ -13,6 +11,7 @@ TARG=\
 	testnetstr.dis\
 	writenetstr.dis\
 	testrssgen.dis\
+	cgiparse.dis\
 
 SYSMODULES=\
 	arg.m\
