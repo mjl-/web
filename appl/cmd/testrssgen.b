@@ -11,11 +11,9 @@ include "rssgen.m";
 	rssgen: Rssgen;
 	Item: import rssgen;
 
-
 Testrssgen: module {
 	init:	fn(nil: ref Draw->Context, nil: list of string);
 };
-
 
 init(nil: ref Draw->Context, args: list of string)
 {

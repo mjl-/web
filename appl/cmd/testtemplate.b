@@ -1,20 +1,16 @@
 implement Testtemplate;
 
 include "sys.m";
+	sys: Sys;
+	print: import sys;
 include "draw.m";
 include "template.m";
+	template: Template;
+	Form: import template;
 
-sys: Sys;
-template: Template;
-Form: import template;
-print: import sys;
-
-
-Testtemplate: module
-{
+Testtemplate: module {
 	init:	fn(nil: ref Draw->Context, nil: list of string);
 };
-
 
 init(nil: ref Draw->Context, nil: list of string)
 {

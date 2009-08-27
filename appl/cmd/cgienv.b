@@ -4,17 +4,15 @@ implement Cgienv;
 
 include "sys.m";
 	sys: Sys;
+	print: import sys;
 include "draw.m";
 include "env.m";
 	env: Env;
 include "cgi.m";
 	cgi: Cgi;
-
-print: import sys;
-Fields: import cgi;
+	Fields: import cgi;
 
 Cgienv: module {
-	modinit:	fn(): string;
 	init:	fn(nil: ref Draw->Context, nil: list of string);
 };
 

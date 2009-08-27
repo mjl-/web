@@ -3,6 +3,7 @@
 %{
 include "sys.m";
 	sys: Sys;
+	sprint: import sys;
 include "template.m";
 include "bufio.m";
 	bufio: Bufio;
@@ -16,7 +17,6 @@ include "string.m";
 include "regex.m";
 	regex: Regex;
 
-sprint: import sys;
 
 YYSTYPE: adt {
 	c: int;

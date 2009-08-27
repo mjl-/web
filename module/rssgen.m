@@ -1,4 +1,5 @@
-Rssgen: module {
+Rssgen: module
+{
 	PATH:	con "/dis/lib/rssgen.dis";
 
 	Item: adt {

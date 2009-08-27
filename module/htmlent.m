@@ -1,4 +1,5 @@
-Htmlent: module {
+Htmlent: module
+{
 	PATH:	con "/dis/lib/htmlent.dis";
 	entities:	array of (string, int);
 

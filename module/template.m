@@ -1,4 +1,5 @@
-Template: module {
+Template: module
+{
 	PATH:	con "/dis/lib/template.dis";
 
 	Vars: adt {

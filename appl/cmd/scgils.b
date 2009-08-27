@@ -2,6 +2,7 @@ implement Scgils;
 
 include "sys.m";
 	sys: Sys;
+	print, sprint: import sys;
 include "draw.m";
 include "env.m";
 	env: Env;
@@ -9,11 +10,7 @@ include "string.m";
 	str: String;
 include "template.m";
 	template: Template;
-
-print, sprint, fprint, fildes: import sys;
-Form, Vars: import template;
-DMDIR, DMAPPEND, DMEXCL, DMAUTH: import sys;
-
+	Form, Vars: import template;
 
 Scgils: module {
 	modinit:	fn(): string;
@@ -79,7 +76,7 @@ init(nil: ref Draw->Context, nil: list of string)
 			ct += "; charset=utf-8";
 		print("Content-Type: %s\r\n", ct);
 		print("Cache-control: max-age=86400\r\n\r\n");
-		sys->stream(fd, fildes(1), sys->ATOMICIO);
+		sys->stream(fd, sys->fildes(1), sys->ATOMICIO);
 	}
 }
 
@@ -162,13 +159,13 @@ permstr(perm: int): string
 modestr(mode: int): string
 {
 	s := "";
-	case mode & (DMDIR|DMAUTH|DMAPPEND) {
-	DMDIR =>	s += "d";
-	DMAUTH =>	s += "A";
-	DMAPPEND =>	s += "a";
-	* =>		s += "-";
+	case mode & (Sys->DMDIR|Sys->DMAUTH|Sys->DMAPPEND) {
+	Sys->DMDIR =>		s += "d";
+	Sys->DMAUTH =>		s += "A";
+	Sys->DMAPPEND =>	s += "a";
+	* =>			s += "-";
 	}
-	if(mode & DMEXCL)
+	if(mode & Sys->DMEXCL)
 		s += "l";
 	else
 		s += "-";
@@ -198,7 +195,7 @@ infix(instr, s: string): int
 
 error(s: string)
 {
-	fprint(fildes(2), "%s\n", s);
+	sys->fprint(sys->fildes(2), "%s\n", s);
 	print("Status: 200 OK\r\n");
 	print("Content-Type: text/plain\r\n\r\n");
 	print("%s\n", s);

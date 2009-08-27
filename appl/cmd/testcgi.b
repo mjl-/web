@@ -1,14 +1,12 @@
 implement Testcgi;
 
 include "sys.m";
+	sys: Sys;
+	print: import sys;
 include "draw.m";
 include "cgi.m";
-
-sys: Sys;
-cgi: Cgi;
-
-print: import sys;
-Fields: import cgi;
+	cgi: Cgi;
+	Fields: import cgi;
 
 Testcgi: module {
 	init:	fn(nil: ref Draw->Context, nil: list of string);

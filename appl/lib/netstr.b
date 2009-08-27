@@ -2,6 +2,7 @@ implement Netstr;
 
 include "sys.m";
 	sys: Sys;
+	sprint: import sys;
 include "netstr.m";
 
 
@@ -14,13 +15,13 @@ init()
 
 readstr(fd: ref Sys->FD): (string, string)
 {
-	(r, s) := readbytes(fd);
-	if(r != nil)
-		return (r, nil);
-	return (nil, string s);
+	(a, err) := readbytes(fd);
+	if(err == nil)
+		s := string a;
+	return (s, err);
 }
 
-readbytes(fd: ref Sys->FD): (string, array of byte)
+readbytes(fd: ref Sys->FD): (array of byte, string)
 {
 	init();
 
@@ -30,20 +31,20 @@ readbytes(fd: ref Sys->FD): (string, array of byte)
 		a := array[1] of byte;
 		count := sys->read(fd, a, 1);
 		if(count == 0)
-			return ("eof reading length", nil);
+			return (nil, "eof reading length");
 		if(count < 0)
-			return ("error reading length", nil);
+			return (nil, "error reading length");
 		c := int a[0];
 		if(c >= '0' && c <= '9') {
 			if(first == '0')
-				return ("invalid leading zero", nil);
+				return (nil, "invalid leading zero");
 			n = 10*n + (c - '0');
 			if(first == -1)
 				first = c;
 			continue;
 		}
 		if(c != ':')
-			return ("missing semicolon", nil);
+			return (nil, "missing semicolon");
 		break;
 	}
 
@@ -52,14 +53,14 @@ readbytes(fd: ref Sys->FD): (string, array of byte)
 	while(off < len a) {
 		have := sys->read(fd, a[off:], len a - off);
 		if(have == 0)
-			return ("eof while reading data", nil);
+			return (nil, "eof while reading data");
 		if(have < 0)
-			return (sys->sprint("error while reading data: %r"), nil);
+			return (nil, sprint("error while reading data: %r"));
 		off += have;
 	}
 	if(a[n] != byte ',')
-		return ("missing closing comma", nil);
-	return (nil, a[:n]);
+		return (nil, "missing closing comma");
+	return (a[:n], nil);
 }
 
 writestr(fd: ref Sys->FD, s: string): string
@@ -75,21 +76,21 @@ writebytes(fd: ref Sys->FD, a: array of byte): string
 	end := array of byte string ",";
 	n := sys->write(fd, start, len start);
 	if(n == 0)
-		return sys->sprint("eof while writing length");
+		return sprint("eof while writing length");
 	if(n != len start)
-		return sys->sprint("error writing length: %r");
+		return sprint("error writing length: %r");
 
 	n = sys->write(fd, a, len a);
 	if(n == 0)
-		return sys->sprint("eof while writing data");
+		return sprint("eof while writing data");
 	if(n != len a)
-		return sys->sprint("error writing data: %r");
+		return sprint("error writing data: %r");
 
 	n = sys->write(fd, end, len end);
 	if(n == 0)
-		return sys->sprint("eof while writing ending comma");
+		return sprint("eof while writing ending comma");
 	if(n != len end)
-		return sys->sprint("error writing ending comma: %r");
+		return sprint("error writing ending comma: %r");
 
 	return nil;
 }
@@ -114,37 +115,37 @@ packbytes(a: array of byte): array of byte
 
 unpackstr(s: string): (string, string)
 {
-	(err, a) := unpackbytes(array of byte s);
-	if(err != nil)
-		return (err, nil);
-	return (nil, string a);
+	(a, err) := unpackbytes(array of byte s);
+	if(err == nil)
+		r := string a;
+	return (r, err);
 }
 
-unpackbytes(a: array of byte): (string, array of byte)
+unpackbytes(a: array of byte): (array of byte, string)
 {
 	n := 0;
 	first := -1;
 	for(;;) {
 		if(len a == 0)
-			return ("data too short", nil);
+			return (nil, "data too short");
 		c := int a[0];
 		a = a[1:];
 		if(c >= '0' && c <= '9') {
 			if(first == '0')
-				return ("invalid leading zero", nil);
+				return (nil, "invalid leading zero");
 			n = 10*n + (c - '0');
 			if(first == -1)
 				first = c;
 			continue;
 		}
 		if(c != ':')
-			return ("missing semicolon", nil);
+			return (nil, "missing semicolon");
 		break;
 	}
 
 	if(len a < n+1)
-		return ("data too short", nil);
+		return (nil, "data too short");
 	if(a[n] != byte ',')
-		return ("terminating character not comma", nil);
-	return (nil, a[:n]);
+		return (nil, "terminating character not comma");
+	return (a[:n], nil);
 }

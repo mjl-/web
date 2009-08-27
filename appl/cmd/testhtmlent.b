@@ -5,11 +5,9 @@ include "sys.m";
 include "draw.m";
 include "htmlent.m";
 
-Testhtmlent: module
-{
+Testhtmlent: module {
 	init:	fn(nil: ref Draw->Context, nil: list of string);
 };
-
 
 init(nil: ref Draw->Context, nil: list of string)
 {
