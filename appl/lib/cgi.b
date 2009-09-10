@@ -29,37 +29,45 @@ init()
 Fields.get(f: self ref Fields, name: string): string
 {
 	for(l := f.l; l != nil; l = tl l) {
-		(k, v) := hd l;
+		(k, v, nil) := hd l;
 		if(k == name)
 			return v;
 	}
 	return nil;
 }
 
+Fields.getbytes(f: self ref Fields, name: string): array of byte
+{
+	for(l := f.l; l != nil; l = tl l) {
+		(k, nil, v) := hd l;
+		if(k == name)
+			return v;
+	}
+	return nil;
+}
 
 Fields.getdefault(f: self ref Fields, name, default: string): string
 {
 	for(l := f.l; l != nil; l = tl l) {
-		(k, v) := hd l;
+		(k, v, nil) := hd l;
 		if(k == name)
 			return v;
 	}
 	return default;
 }
 
-
 Fields.getlist(f: self ref Fields, name: string): list of string
 {
 	r: list of string;
 	for(l := f.l; l != nil; l = tl l) {
-		(k, v) := hd l;
+		(k, v, nil) := hd l;
 		if(k == name)
 			r = v :: r;
 	}
 	return r;
 }
 
-Fields.all(f: self ref Fields): list of (string, string)
+Fields.all(f: self ref Fields): list of (string, string, array of byte)
 {
 	return f.l;
 }
@@ -72,7 +80,6 @@ Fields.has(f: self ref Fields, name: string): int
 	return 0;
 }
 
-
 hex(c: int): int
 {
 	if(c >= '0' && c <= '9')
@@ -84,8 +91,7 @@ hex(c: int): int
 	return -1;
 }
 
-
-decode(s: string): string
+decodebytes(s: string): array of byte
 {
 	sa := array of byte s;
 	ra := array[len sa] of byte;
@@ -112,15 +118,18 @@ decode(s: string): string
 		}
 		ra[ri++] = c;
 	}
-	return string ra[:ri];
+	return ra[:ri];
 }
 
+decode(s: string): string
+{
+	return string decodebytes(s);
+}
 
 encodepath(s: string): string
 {
 	return _encode(s, "/");
 }
-
 
 encode(s: string): string
 {
@@ -144,7 +153,6 @@ _encode(s: string, okayspecial: string): string
 	return r;
 }
 
-
 pack(l: list of (string, string)): string
 {
 	r := "";
@@ -160,7 +168,6 @@ pack(l: list of (string, string)): string
 	return r;
 }
 
-
 htmlescape(s: string): string
 {
 	r := "";
@@ -175,7 +182,6 @@ htmlescape(s: string): string
 	return r;
 }
 
-
 tokenize(s, delims: string): list of string
 {
 	if(s == "")
@@ -185,7 +191,6 @@ tokenize(s, delims: string): list of string
 		remain = remain[1:];
 	return token :: tokenize(remain, delims);
 }
-
 
 readstr(fd: ref Sys->FD, n: int): string
 {
@@ -253,7 +258,7 @@ unpackenv(): ref Fields
 
 unpack(s: string): ref Fields
 {
-	l: list of (string, string);
+	l: list of (string, string, array of byte);
 	pairs := tokenize(s, "&");
 	while(pairs != nil) {
 		pair := hd pairs;
@@ -263,8 +268,8 @@ unpack(s: string): ref Fields
 			continue;
 		v = v[1:];
 		k = decode(k);
-		v = decode(v);
-		l = (k, v) :: l;
+		vd := decodebytes(v);
+		l = (k, string vd, vd)::l;
 	}
 	return ref Fields(l);
 }

@@ -30,7 +30,7 @@ init(nil: ref Draw->Context, args: list of string)
 	qs := hd args;
 	f := cgi->unpack(qs);
 	for(p := f.all(); p != nil; p = tl p) {
-		(k, v) := hd p;
+		(k, v, nil) := hd p;
 		print("have %s=%s\n", k, v);
 	}
 
@@ -38,7 +38,10 @@ init(nil: ref Draw->Context, args: list of string)
 	print("getdefault(oink): %s=%s\n", "blah", f.getdefault("blah", "oink"));
 	print("getlist: %s -> len %d\n", "blah", len f.getlist("blah"));
 		
-	qs2 := cgi->pack(f.l);
+	l: list of (string, string);
+	for(fl := f.l; fl != nil; fl = tl fl)
+		l = ((hd fl).t0, (hd fl).t1)::l;
+	qs2 := cgi->pack(l);
 	print("qs=%q qs2=%q\n", qs, qs2);
 
 	print("=== unpackenv\n");
@@ -46,7 +49,7 @@ init(nil: ref Draw->Context, args: list of string)
 	if(f == nil)
 		return;
 	for(p = f.all(); p != nil; p = tl p) {
-		(k, v) := hd p;
+		(k, v, nil) := hd p;
 		print("%s = %s\n", k, v);
 	}
 }
