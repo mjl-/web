@@ -57,7 +57,7 @@ init(nil: ref Draw->Context, args: list of string)
 			qs := hd qsl;
 		f := cgi->unpack(qs);
 		for(l := f.l; l != nil; l = tl l) {
-			(k, v) := hd l;
+			(k, v, nil) := hd l;
 			if(hasnul(k) || hasnul(v))
 				fail("nul character in parameters, refusing to process");
 			if(b.puts(k)    == Bufio->ERROR

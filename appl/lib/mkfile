@@ -11,15 +11,28 @@ TARG=\
 MODULES=\
 
 SYSMODULES=\
-	sys.m\
-	draw.m\
+	asn1.m\
 	bufio.m\
+	daytime.m\
 	dict.m\
-	string.m\
+	encoding.m\
 	env.m\
+	filter.m\
+	keyring.m\
+	pkcs.m\
+	regex.m\
+	security.m\
+	ssl3.m\
+	sslsession.m\
+	string.m\
+	sys.m\
 	cgi.m\
 	htmlent.m\
+	netstr.m\
+	ohttp.m\
 	rssgen.m\
+	template.m\
+
 
 DISBIN=$ROOT/dis/lib
 

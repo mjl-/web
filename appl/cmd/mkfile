@@ -16,14 +16,16 @@ TARG=\
 SYSMODULES=\
 	arg.m\
 	bufio.m\
-	daytime.m\
+	cgi.m\
 	draw.m\
 	env.m\
-	keyring.m\
-	template.m\
+	htmlent.m\
+	lists.m\
+	netstr.m\
+	rssgen.m\
 	string.m\
 	sys.m\
-	rssgen.m\
+	template.m\
 
 DISBIN=$ROOT/dis
 

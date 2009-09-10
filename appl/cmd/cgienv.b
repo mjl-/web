@@ -41,8 +41,8 @@ init(nil: ref Draw->Context, nil: list of string)
 
 	print("===\n");
 	fields := cgi->unpackenv();
-	for(l = fields.all(); l != nil; l = tl l) {
-		(key, value) := hd l;
+	for(ll := fields.all(); ll != nil; ll = tl ll) {
+		(key, value, nil) := hd ll;
 		print("%s=%q\n", key, value);
 	}
 	print("===\n");

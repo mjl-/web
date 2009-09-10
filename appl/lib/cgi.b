@@ -8,7 +8,7 @@ include "bufio.m";
 	Iobuf: import bufio;
 include "string.m";
 	str: String;
-include "env.m";	
+include "env.m";
 	env: Env;
 include "dict.m";
 	dict: Dictionary;
