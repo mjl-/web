@@ -10,9 +10,8 @@ web - a collection of code for dealing with "the web".
 
 # install
 
-to install make sure this directory has a mkconfig.  you can bind/symlink
-the mkconfig from your inferno installation.  now execute "mk install"
-and all should be well.
+make sure you have $ROOT set, now "mk install" to compile and install
+the files.
 
 when building from within inferno, insert SYSHOST=Inferno and ROOT=
 in the mk invocations to override the values in the mkconfig.
